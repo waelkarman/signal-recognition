@@ -110,8 +110,14 @@ while True:
     ret, frame = cap.read()
     if not ret:
         break
-    preprocessed_frame = preprocess_frame(frame)
-    predictions = model.predict(preprocessed_frame)
+    # preprocessed_frame = preprocess_frame(frame)
+    # predictions = model.predict(preprocessed_frame)
+
+    frame_resized = cv2.resize(frame, (32, 32))
+    frame_array = tf.keras.utils.img_to_array(frame_resized) / 255.0
+    frame_array = np.expand_dims(frame_array, axis=0) 
+    predictions = model.predict(frame_array)
+
     predicted_class = np.argmax(predictions)  
     cv2.putText(frame, f'Predizione: {predicted_class}', (10, 30), cv2.FONT_HERSHEY_SIMPLEX, 1, (0, 255, 0), 2)
     cv2.imshow('Video Classification', frame)
