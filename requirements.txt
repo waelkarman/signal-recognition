@@ -145,3 +145,6 @@ xkit==0.0.0
 zipp==1.0.0
 tensorflow>=2.0.0
 scikit-learn>=0.22.0
+torch 
+torchvision 
+opencv-python
